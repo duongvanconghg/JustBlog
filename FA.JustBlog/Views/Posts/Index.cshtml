@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using FA.JustBlog.Core.Models;
+@using FA.JustBlog.CustomHelper;
+@using FA.JustBlog.ViewModel.Posts;
+@{
+    var posts = ViewBag.Posts as List<PostsVM>;
+    var categories = ViewBag.Categories as List<Categories>;
+    var tags = ViewBag.Tags as List<Tags>;
+}
+@foreach(var post in posts) {
+    <div class="post-preview">
+        <a href="@Url.Action("Details", "Posts", new { year = post.PostedOn.Year, month = post.PostedOn.Month.ToString("00"), title = post.UrlSlug })">
+            <h2 class="post-title">@post.Title</h2>
+            <h3 class="post-subtitle">@post.ShortDescription</h3>
+        </a>
+        <p class="post-meta">
+            Posted by
+            <a href="#!">Start Bootstrap</a>
+            @post.PostedOn
+        </p>
+        <div class="category-view">
+            @{
+                var category = categories?.FirstOrDefault(x => x.Id == post.CategoryId);
+                var categoryName = category.Name;
+                var categoryUrlSlug = category.UrlSlug;
+            }
+            <span>Category: </span>@Html.CategoryLink(category.Name, category.UrlSlug)
+        </div>
+        <div class="tag-view">
+            Tags:
+            <br>
+            @foreach (var tag in post.Tags)
+            {
+                <a href="/Tags/@tag.UrlSlug">@tag.Name</a>
+            }
+        </div>
+    </div>
+    <!-- Divider-->
+    <hr class="my-4" />
+}

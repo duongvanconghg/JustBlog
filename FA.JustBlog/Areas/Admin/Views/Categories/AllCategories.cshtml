@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using FA.JustBlog.Core.Models;
+@model IEnumerable<Categories>;
+
+<h1>All Categories</h1>
+<div>
+    <a href="CreateNew" class="btn btn-primary">Create New</a>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Url Slug</th>                          
+                            <th scope="col">Detail</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var category in Model)
+                        {
+                            <tr>
+                                <td>@category.Name</td>
+                                <td>@category.Description</td>
+                                <td>@category.UrlSlug</td>
+                                <td>
+                                    <a href="/Admin/Categories/Detail/@category.Id">
+                                        <input type="button" class="btn btn-primary" value="Detail">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/Admin/Categories/Edit/@category.Id">
+                                        <input type="button" class="btn btn-warning" value="Edit">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/Admin/Categories/Delete/@category.Id">
+                                        <input type="button" class="btn btn-danger" value="Delete">
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Url Slug</th>                           
+                            <th scope="col">Detail</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
+</div>

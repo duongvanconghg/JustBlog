@@ -1,0 +1,99 @@
+﻿@using FA.JustBlog.Core.Models;
+@model IEnumerable<Posts>;
+
+<h1>UnPublished Posts</h1>
+
+@if (Model == null || Model.Count() == 0) {
+    <h2>No Unpublished Posts</h2>
+} else {
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">DataTable with default features</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Short Description</th>
+                                <th scope="col">Url Slug</th>
+                                <th scope="col">Published</th>
+                                <th scope="col">Posted On</th>
+                                <th scope="col">Modified</th>
+                                <th scope="col">Detail</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var post in Model)
+                            {
+                                <tr>
+                                    <td>@post.Title</td>
+                                    <td>@post.ShortDescription</td>
+                                    <td>@post.UrlSlug</td>
+                                    <td>@post.Published</td>
+                                    <td>@post.PostedOn</td>
+                                    <td>@post.Modified</td>
+                                    <td>
+                                        <a href="/Admin/Posts/Detail/@post.Id">
+                                            <input type="button" class="btn btn-primary" value="Detail">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/Posts/Edit/@post.Id">
+                                            <input type="button" class="btn btn-warning" value="Edit">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/Posts/Delete/@post.Id">
+                                            <input type="button" class="btn btn-danger" value="Delete">
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Short Description</th>
+                                <th scope="col">Url Slug</th>
+                                <th scope="col">Published</th>
+                                <th scope="col">Posted On</th>
+                                <th scope="col">Modified</th>
+                                <th scope="col">Detail</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
+}

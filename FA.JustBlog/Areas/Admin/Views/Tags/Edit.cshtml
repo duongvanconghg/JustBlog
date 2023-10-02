@@ -1,0 +1,25 @@
+﻿@using FA.JustBlog.Core.Models;
+@model Tags;
+
+
+<h1>Edit Tag</h1>
+<form asp-controller="Tags" asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Title</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Short Description</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UrlSlug">Url Slug</label>
+        <input asp-for="UrlSlug" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Count">Count</label>
+        <input asp-for="Count" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+

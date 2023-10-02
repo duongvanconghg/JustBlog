@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using FA.JustBlog.Core.Models;
+@using FA.JustBlog.CustomHelper;
+
+@{
+    var categories = ViewBag.Categories as List<Categories>;
+}
+
+@if (categories != null || categories.Count() > 0)
+{
+    foreach (var category in categories)
+    {
+        <div class="post-preview">
+            <h2 class="post-title">@category.Name</h2>
+        </div>
+    }
+}

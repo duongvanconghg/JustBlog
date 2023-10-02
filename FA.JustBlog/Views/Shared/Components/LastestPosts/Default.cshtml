@@ -1,0 +1,18 @@
+﻿@using FA.JustBlog.Core.Models;
+@model IEnumerable<Posts>;
+
+
+<div class="card">
+    <div class="card-content">
+        <img src="/assets/img/post-bg.jpg" alt="Your Image">
+        <div class="card-detail">
+            <h2>Lastest Post!</h2>
+            <hr class="my-4" />
+            @foreach (var post in Model)
+            {
+                <a href="@Url.Action("Details", "Posts", new { year = post.PostedOn.Year, month = post.PostedOn.Month.ToString("00"), title = post.UrlSlug })">@post.Title</a>
+                <hr class="my-4" />
+            }
+        </div>     
+    </div>
+</div>
